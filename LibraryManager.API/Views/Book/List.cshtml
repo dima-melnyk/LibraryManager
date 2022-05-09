@@ -31,7 +31,8 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                <img alt="" width="300" height="300" src="/Book/GetPhoto?name=@item.Name"/>
+                <img alt="" width="300" height="300" src="/Book/GetPhoto?id=@item.Id"/>
+                @Html.HiddenFor(modelItem => item.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -43,9 +44,8 @@
                 @Html.DisplayFor(modelItem => item.Grade)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Update", new { item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { item.Id })
             </td>
         </tr>
 }

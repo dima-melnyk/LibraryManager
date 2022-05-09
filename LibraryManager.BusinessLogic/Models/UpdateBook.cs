@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace LibraryManager.BusinessLogic.Models
 {
-    public class CreateBook
+    public class UpdateBook
     {
+        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -12,7 +12,5 @@ namespace LibraryManager.BusinessLogic.Models
         [Required]
         [Range(1, 4)]
         public int Grade { get; set; }
-
-        public IFormFile File { get; set; }
     }
 }

@@ -1,16 +1,14 @@
 ﻿using LibraryManager.BusinessLogic.Interfaces;
 using LibraryManager.BusinessLogic.Models;
 using LibraryManager.BusinessLogic.Queries;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace LibraryManager.API.Controllers
 {
     public class BookController : Controller
     {
-        private IBookManager _manager;
+        private readonly IBookManager _manager;
         
         public BookController(IBookManager manager)
         {
@@ -36,9 +34,37 @@ namespace LibraryManager.API.Controllers
             return RedirectToAction("List");
         }
 
-        public async Task<IActionResult> GetPhoto([FromQuery]string name)
+        public async Task<IActionResult> Update(int id)
         {
-            byte[] cover = await _manager.GetBookImage(name);
+            var updateBook = await _manager.GetBookToUpdateAsync(id);
+            return View(updateBook);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update([FromForm]UpdateBook updateBook)
+        {
+            await _manager.UpdateBookAsync(updateBook);
+            return RedirectToAction("List");
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var bookToDelete = await _manager.GetBookAsync(id);
+            return View(bookToDelete);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(BookModel book)
+        {
+            await _manager.RemoveBookAsync(book.Id);
+            return RedirectToAction("List");
+        }
+
+        public async Task<IActionResult> GetPhoto(int id)
+        {
+            byte[] cover = await _manager.GetBookImageAsync(id);
             if (cover != null)
             {
                 return File(cover, "image/png");

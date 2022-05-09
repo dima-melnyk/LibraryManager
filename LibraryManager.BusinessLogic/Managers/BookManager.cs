@@ -42,9 +42,9 @@ namespace LibraryManager.BusinessLogic.Managers
             await _context.SaveChangesAsync();
         }
 
-        public async Task<BookModel> GetBookAsync(string name)
+        public async Task<BookModel> GetBookAsync(int id)
         {
-            var book = await _context.Set<Book>().FirstOrDefaultAsync(b => b.Name == name);
+            var book = await GetBookById(id);
             return _mapper.Map<BookModel>(book);
         }
 
@@ -57,11 +57,35 @@ namespace LibraryManager.BusinessLogic.Managers
                 .Select(_mapper.Map<BookModel>);
         }
 
-        public async Task<byte[]> GetBookImage(string name)
+        public async Task UpdateBookAsync(UpdateBook updateBook)
         {
-            var book = await _context.Set<Book>().Where(b => b.Name == name)
+            var bookToUpdate = await GetBookById(updateBook.Id);
+            _mapper.Map(updateBook, bookToUpdate);
+            _context.Update(bookToUpdate);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task RemoveBookAsync(int id)
+        {
+            var bookToDelete = await GetBookById(id);
+            _context.Remove(bookToDelete);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<UpdateBook> GetBookToUpdateAsync(int id)
+        {
+            var bookToUpdate = await GetBookById(id);
+            var updateBook = new UpdateBook();
+            return _mapper.Map(bookToUpdate, updateBook);
+        }
+
+        public async Task<byte[]> GetBookImageAsync(int id)
+        {
+            var book = await _context.Set<Book>().Where(b => b.Id == id)
                 .Select(b => b.Image).FirstOrDefaultAsync();
             return book;
         }
+
+        private Task<Book> GetBookById(int id) => _context.Set<Book>().FirstOrDefaultAsync(b => b.Id == id);
     }
 }

@@ -11,6 +11,9 @@ namespace LibraryManager.API.Mapper
             CreateMap<Book, BookModel>();
             CreateMap<CreateBook, Book>()
                 .ForMember(b => b.Image, opt => opt.Ignore());
+            CreateMap<UpdateBook, Book>()
+                .ForMember(b => b.Image, opt => opt.Ignore());
+            CreateMap<Book, UpdateBook>();
         }
     }
 }
