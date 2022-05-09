@@ -3,11 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryManager.API", "LibraryManager.API\LibraryManager.API.csproj", "{DB7DE6B5-DF4A-40D9-9F6E-6B388D35DD5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryManager.API", "LibraryManager.API\LibraryManager.API.csproj", "{DB7DE6B5-DF4A-40D9-9F6E-6B388D35DD5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryManager.BusinessLogic", "LibraryManager.BusinessLogic\LibraryManager.BusinessLogic.csproj", "{7A2FA288-DA8D-4066-BB1E-C4A76F08B65F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryManager.BusinessLogic", "LibraryManager.BusinessLogic\LibraryManager.BusinessLogic.csproj", "{7A2FA288-DA8D-4066-BB1E-C4A76F08B65F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryManager.DataAccess", "LibraryManager.DataAccess\LibraryManager.DataAccess.csproj", "{85DF5C5B-59A7-4079-AA0B-0CC2F0323C00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryManager.DataAccess", "LibraryManager.DataAccess\LibraryManager.DataAccess.csproj", "{85DF5C5B-59A7-4079-AA0B-0CC2F0323C00}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D03D3B57-1F8E-45BA-A177-12D01902F55A}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

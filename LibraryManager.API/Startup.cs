@@ -1,15 +1,14 @@
+using AutoMapper;
+using LibraryManager.API.Mapper;
+using LibraryManager.BusinessLogic.Interfaces;
+using LibraryManager.BusinessLogic.Managers;
 using LibraryManager.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LibraryManager.API
 {
@@ -32,6 +31,9 @@ namespace LibraryManager.API
                 options.UseSqlServer(Configuration.GetConnectionString("LibraryDatabase"));
                 options.UseLazyLoadingProxies();
             });
+
+            ConfigureMapper(services);
+            services.AddTransient<IBookManager, BookManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,8 +60,17 @@ namespace LibraryManager.API
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Book}/{action=List}/{id?}");
             });
+        }
+
+        private static void ConfigureMapper(IServiceCollection services)
+        {
+            var mapperConfig = new MapperConfiguration(mc =>
+                mc.AddProfile(new MapperProfile()));
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
     }
 }
