@@ -11,8 +11,6 @@ namespace LibraryManager.DataAccess.Entities
         public string Name { get; set; }
         public string Subject { get; set; }
         public int Grade { get; set; }
-
-        public int ImageId { get; set; }
-        public virtual Image Image { get; set; }
+        public byte[] Image { get; set; }
     }
 }
