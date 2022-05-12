@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using LibraryManager.BusinessLogic.Models;
+using LibraryManager.BusinessLogic.Models.Book;
 using LibraryManager.DataAccess.Entities;
 
 namespace LibraryManager.API.Mapper

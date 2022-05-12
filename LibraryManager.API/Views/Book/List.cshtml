@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LibraryManager.BusinessLogic.Models.BookModel>
+﻿@model IEnumerable<LibraryManager.BusinessLogic.Models.Book.BookModel>
 
 @{
     ViewData["Title"] = "ListOfBooks";
@@ -6,9 +6,12 @@
 
 <h1>ListOfBooks</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -28,26 +31,31 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <img alt="" width="300" height="300" src="/Book/GetPhoto?id=@item.Id"/>
-                @Html.HiddenFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subject)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Grade)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Update", new { item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { item.Id })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img alt="" width="300" height="300" src="/Book/GetPhoto?id=@item.Id" />
+                    @Html.HiddenFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subject)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grade)
+                </td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Update", new { item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { item.Id })
+                    </td>
+                }
+
+            </tr>
+        }
     </tbody>
 </table>

@@ -3,12 +3,16 @@ using LibraryManager.API.Mapper;
 using LibraryManager.BusinessLogic.Interfaces;
 using LibraryManager.BusinessLogic.Managers;
 using LibraryManager.DataAccess;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace LibraryManager.API
 {
@@ -32,7 +36,26 @@ namespace LibraryManager.API
                 options.UseLazyLoadingProxies();
             });
 
+            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
+                 .AddEntityFrameworkStores<LibraryContext>()
+                 .AddDefaultTokenProviders();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => 
+            {
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+                options.SlidingExpiration = true;
+                options.AccessDeniedPath = "/Forbidden/";
+            });
+
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.LoginPath = "/auth/login";
+            });
+
+            services.AddAuthorization();
+
             ConfigureMapper(services);
+            services.AddTransient<IAuthManager, AuthManager>();
             services.AddTransient<IBookManager, BookManager>();
         }
 
@@ -54,6 +77,7 @@ namespace LibraryManager.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

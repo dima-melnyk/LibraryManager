@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace LibraryManager.BusinessLogic.Models
+namespace LibraryManager.BusinessLogic.Models.Book
 {
     public class UpdateBook
     {

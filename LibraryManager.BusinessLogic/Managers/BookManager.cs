@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using LibraryManager.BusinessLogic.Interfaces;
-using LibraryManager.BusinessLogic.Models;
+using LibraryManager.BusinessLogic.Models.Book;
 using LibraryManager.BusinessLogic.Queries;
 using LibraryManager.DataAccess;
 using LibraryManager.DataAccess.Entities;

@@ -1,4 +1,4 @@
-﻿using LibraryManager.BusinessLogic.Models;
+﻿using LibraryManager.BusinessLogic.Models.Book;
 using LibraryManager.BusinessLogic.Queries;
 using System.Collections.Generic;
 using System.Threading.Tasks;
