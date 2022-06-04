@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace LibraryManager.DataAccess
 {
@@ -30,7 +31,8 @@ namespace LibraryManager.DataAccess
                     NormalizedEmail = "ADMIN@NULP.COM",
                     PasswordHash = hasher.HashPassword(null, "adm1n_Pass"),
                     EmailConfirmed = true,
-                    PhoneNumberConfirmed = true
+                    PhoneNumberConfirmed = true,
+                    SecurityStamp = Guid.NewGuid().ToString()
                 }
             );
             modelBuilder.Entity<IdentityUserRole<int>>().HasData(

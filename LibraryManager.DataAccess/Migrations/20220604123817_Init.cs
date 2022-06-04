@@ -173,17 +173,17 @@ namespace LibraryManager.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 1, "f48ba0ab-044c-4f04-bea9-2760e8b6c513", "User", "USER" });
+                values: new object[] { 1, "352b25e0-d506-4029-be36-50c31c6cc948", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 2, "98b3d274-107b-43f7-a841-000e48c77480", "Admin", "ADMIN" });
+                values: new object[] { 2, "cabefcbd-cffa-436c-8925-887b81b24d58", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "557209a9-fa2d-4339-a123-2d6fe9ca198a", "admin@nulp.com", true, false, null, "ADMIN@NULP.COM", "ADMIN", "AQAAAAEAACcQAAAAEHDzK8m/3BAbgQMyZTZBwZ2FTAavOzpYr0tWeT0LwAMh0jzGUyZ/RTe5QhEvcogNjw==", null, true, null, false, "Admin" });
+                values: new object[] { 1, 0, "fad57e21-a7c0-4bfe-a5e6-44764ec6c960", "admin@nulp.com", true, false, null, "ADMIN@NULP.COM", "ADMIN", "AQAAAAEAACcQAAAAEJsBz97z7wr9rdjCXE0Q0tZY1KGcMXgrOcrTdAnoXwRwB6EPgsCV/nYE2BEnH0kKug==", null, true, "da444c47-105e-440b-8131-b8fa7e5a47ab", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

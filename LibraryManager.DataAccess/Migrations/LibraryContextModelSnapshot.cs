@@ -75,14 +75,14 @@ namespace LibraryManager.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "f48ba0ab-044c-4f04-bea9-2760e8b6c513",
+                            ConcurrencyStamp = "352b25e0-d506-4029-be36-50c31c6cc948",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "98b3d274-107b-43f7-a841-000e48c77480",
+                            ConcurrencyStamp = "cabefcbd-cffa-436c-8925-887b81b24d58",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -182,14 +182,15 @@ namespace LibraryManager.DataAccess.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "557209a9-fa2d-4339-a123-2d6fe9ca198a",
+                            ConcurrencyStamp = "fad57e21-a7c0-4bfe-a5e6-44764ec6c960",
                             Email = "admin@nulp.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@NULP.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHDzK8m/3BAbgQMyZTZBwZ2FTAavOzpYr0tWeT0LwAMh0jzGUyZ/RTe5QhEvcogNjw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJsBz97z7wr9rdjCXE0Q0tZY1KGcMXgrOcrTdAnoXwRwB6EPgsCV/nYE2BEnH0kKug==",
                             PhoneNumberConfirmed = true,
+                            SecurityStamp = "da444c47-105e-440b-8131-b8fa7e5a47ab",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });

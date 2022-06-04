@@ -1,8 +1,7 @@
 ﻿using LibraryManager.BusinessLogic.Interfaces;
 using LibraryManager.BusinessLogic.Models.Auth;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -12,10 +11,12 @@ namespace LibraryManager.API.Controllers
     public class AuthController : Controller
     {
         private readonly IAuthManager _authManager;
+        private readonly SignInManager<IdentityUser<int>> _signInManager;
 
-        public AuthController(IAuthManager authManager)
+        public AuthController(IAuthManager authManager, SignInManager<IdentityUser<int>> signInManager)
         {
             _authManager = authManager;
+            _signInManager = signInManager;
         }
 
         public IActionResult Register()
@@ -26,12 +27,24 @@ namespace LibraryManager.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromForm] RegisterUser user)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("List", "Book");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(user);
             }
 
-            await _authManager.Register(user);
+            var errors = await _authManager.Register(user);
+
+            if (!string.IsNullOrEmpty(errors))
+            {
+                ModelState.AddModelError("Password", errors);
+                return View(user);
+            }
+
             return RedirectToAction("Login");
         }
 
@@ -43,10 +56,16 @@ namespace LibraryManager.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromForm] LoginUser user)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("List", "Book");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(user);
             }
+
             var userData = await _authManager.Login(user);
 
             if (userData == null)
@@ -54,7 +73,7 @@ namespace LibraryManager.API.Controllers
                 ModelState.AddModelError("Password", "Incorrect login or password");
                 return View(user);
             }
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, userData, new AuthenticationProperties() { IsPersistent = false });
+            await _signInManager.SignInAsync(userData, false);
 
             return RedirectToAction("List", "Book");
         }

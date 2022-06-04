@@ -38,7 +38,8 @@ namespace LibraryManager.API
 
             services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
                  .AddEntityFrameworkStores<LibraryContext>()
-                 .AddDefaultTokenProviders();
+                 .AddDefaultTokenProviders()
+                 .AddSignInManager<SignInManager<IdentityUser<int>>>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => 
             {
