@@ -3,11 +3,11 @@ using LibraryManager.BusinessLogic.Models.Book;
 using LibraryManager.BusinessLogic.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LibraryManager.API.Controllers
 {
-    [Authorize]
     public class BookController : Controller
     {
         private readonly IBookManager _manager;
@@ -17,9 +17,11 @@ namespace LibraryManager.API.Controllers
             _manager = manager;
         }
 
-        public IActionResult List([FromQuery]BookQuery query)
+        public async Task<IActionResult> List([FromQuery]BookQuery query)
         {
             var books = _manager.GetBooksAsync(query);
+            ViewBag.Subjects = await _manager.GetAllSubjects();
+            ViewBag.Grades = await _manager.GetAllGrades();
             return View(books);
         }
 

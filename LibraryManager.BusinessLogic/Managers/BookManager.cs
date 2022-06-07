@@ -28,16 +28,19 @@ namespace LibraryManager.BusinessLogic.Managers
         {
             var entity = _mapper.Map<Book>(createBook);
 
-            if (createBook.File.Length > 0)
+            if (createBook.File != null)
             {
-                using (var ms = new MemoryStream())
+                if (createBook.File.Length > 0)
                 {
-                    createBook.File.CopyTo(ms);
-                    var fileBytes = ms.ToArray();
-                    entity.Image = fileBytes;
+                    using (var ms = new MemoryStream())
+                    {
+                        createBook.File.CopyTo(ms);
+                        var fileBytes = ms.ToArray();
+                        entity.Image = fileBytes;
+                    }
                 }
             }
-
+            
             await _context.Set<Book>().AddAsync(entity);
             await _context.SaveChangesAsync();
         }
@@ -52,7 +55,7 @@ namespace LibraryManager.BusinessLogic.Managers
         {
             return _context.Set<Book>()
                 .Where(b => b.Name.Contains(query.Name, StringComparison.OrdinalIgnoreCase) || query.Name == null)
-                .Where(b => b.Subject.Contains(query.Subject, StringComparison.OrdinalIgnoreCase) || query.Subject == null)
+                .Where(b => b.Subject.Contains(query.Subject) || query.Subject == null)
                 .Where(b => b.Grade == query.Grade || query.Grade == null)
                 .Select(_mapper.Map<BookModel>);
         }
@@ -85,6 +88,9 @@ namespace LibraryManager.BusinessLogic.Managers
                 .Select(b => b.Image).FirstOrDefaultAsync();
             return book;
         }
+
+        public Task<List<string>> GetAllSubjects() => _context.Set<Book>().Select(b => b.Subject).Distinct().ToListAsync();
+        public Task<List<int>> GetAllGrades() => _context.Set<Book>().Select(b => b.Grade).Distinct().ToListAsync();
 
         private Task<Book> GetBookById(int id) => _context.Set<Book>().FirstOrDefaultAsync(b => b.Id == id);
     }

@@ -19,13 +19,8 @@ namespace LibraryManager.API.Controllers
             _signInManager = signInManager;
         }
 
-        public IActionResult Register()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public async Task<IActionResult> Register([FromForm] RegisterUser user)
+        public async Task<IActionResult> Register([FromForm] AuthViewModel user)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -34,15 +29,15 @@ namespace LibraryManager.API.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View(user);
+                return View("Login", user);
             }
 
-            var errors = await _authManager.Register(user);
+            var errors = await _authManager.Register(user.RegisterUser);
 
             if (!string.IsNullOrEmpty(errors))
             {
                 ModelState.AddModelError("Password", errors);
-                return View(user);
+                return View("Login", user);
             }
 
             return RedirectToAction("Login");
@@ -54,7 +49,7 @@ namespace LibraryManager.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([FromForm] LoginUser user)
+        public async Task<IActionResult> Login([FromForm] AuthViewModel user)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -66,7 +61,7 @@ namespace LibraryManager.API.Controllers
                 return View(user);
             }
 
-            var userData = await _authManager.Login(user);
+            var userData = await _authManager.Login(user.LoginUser);
 
             if (userData == null)
             {
@@ -76,6 +71,13 @@ namespace LibraryManager.API.Controllers
             await _signInManager.SignInAsync(userData, false);
 
             return RedirectToAction("List", "Book");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Auth");
         }
     }
 }

@@ -14,5 +14,7 @@ namespace LibraryManager.BusinessLogic.Interfaces
         Task RemoveBookAsync(int id);
         Task<UpdateBook> GetBookToUpdateAsync(int id);
         Task<byte[]> GetBookImageAsync(int id);
+        Task<List<string>> GetAllSubjects();
+        Task<List<int>> GetAllGrades();
     }
 }

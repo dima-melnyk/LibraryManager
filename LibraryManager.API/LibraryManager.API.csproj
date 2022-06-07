@@ -5,6 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Views\Book\Create.cshtml" />
+    <None Include="Views\Book\Delete.cshtml" />
+    <None Include="Views\Book\Update.cshtml" />
+    <None Include="wwwroot\css\createstyle.css" />
+    <None Include="wwwroot\css\deletestyle.css" />
+    <None Include="wwwroot\css\editstyle.css" />
+    <None Include="wwwroot\css\liststyle.css" />
+    <None Include="wwwroot\css\style.css" />
+    <None Include="wwwroot\source\img\Kniga.jpg" />
+    <None Include="wwwroot\js\custom.js" />
+    <None Include="wwwroot\source\img\bg.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.16" />
     <PackageReference Include="Microsoft.AspNetCore.CookiePolicy" Version="2.2.8" />
