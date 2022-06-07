@@ -1,0 +1,203 @@
+body {
+	background: url(../source/img/Kniga.jpg);
+	margin: 0;
+	color: #060606;
+	font: normal 18px/28px Helvetica, Arial, sans-serif;
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+.clear {
+	clear: both;
+}
+
+.clearfix:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+p {
+	margin: 0;
+	padding: 15px 15px;
+}
+
+a img {
+	border: none;
+}
+
+img {
+	height: 100px;
+	width: 100px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	color: #000;
+}
+
+h1 {
+	width: 225px;
+	color: #060606;
+	line-height: 1.4em;
+}
+
+	h1:hover {
+		opacity: 0.6;
+		cursor: pointer;
+	}
+
+h2 {
+	border-bottom: 1px solid #060606;
+	text-align: center;
+	margin-bottom: 15px;
+	padding: 0 0 12px;
+}
+
+strong {
+	font-weight: bold;
+}
+
+em {
+	font-style: italic;
+}
+
+input {
+	size: 20;
+	maxlength: 20;
+	name: "word"
+}
+
+form, menu, iframe {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+td {
+	text-align: center;
+}
+
+.mainwrapper {
+	min-height: 100%;
+}
+
+div#butthome {
+	float: left;
+}
+
+.resize {
+	margin: 0 auto;
+	padding: 0 20px;
+	max-width: 1200px;
+}
+
+.block_row {
+	padding: 20px;
+	padding-bottom: 90px;
+	padding-top: 90px;
+	padding-right: 15px;
+	margin-left: 15px;
+	min-height: 560px;
+	display: flex;
+	flex-direction: column;
+}
+
+.block_column {
+	flex-grow: 1;
+}
+
+.fields {
+	min-height: 340px;
+	margin-top: 30px;
+	background-color: #fff;
+	padding: 20px 25px 20px 25px;
+	border-radius: 30px;
+	box-shadow: 5px 5px 12px #343434;
+}
+
+.paragr p {
+	padding-top: 25px;
+}
+
+.paragr {
+	float: left;
+}
+
+.phones {
+	padding-right: 15px;
+	float: right;
+}
+
+div#login {
+	float: right;
+}
+
+p#log:hover {
+	opacity: 0.6;
+	cursor: pointer;
+}
+
+p#name {
+	padding: 0;
+}
+
+p#phone {
+	padding: 0;
+}
+
+.white-line {
+	width: 100%;
+	color: #060606;
+	background: #fff;
+	min-height: 60px;
+	box-shadow: 3px 3px 3px #575656;
+	position: fixed;
+	left: 50%;
+	transform: translate(-50%, 0);
+}
+
+.secwhite-line {
+	margin-top: -90px;
+	width: 100%;
+	color: #060606;
+	background: #fff;
+	min-height: 90px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+button#butt2 {
+	margin-bottom: 25px;
+}
+
+.btn {
+	display: block;
+	font-size: 16px;
+	border-color: black;
+	border-radius: 4px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+.specialbtn {
+	display: block;
+	background-color: #4294ff;
+	font-size: 18px;
+	border-color: black;
+	border-radius: 4px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+.btn:hover {
+	background-color: #494e4b;
+	color: white;
+}
+
+.specialbtn:hover {
+	background-color: #313eee;
+	color: white;
+}

@@ -1,0 +1,161 @@
+@using LibraryManager.BusinessLogic.Queries
+@model IEnumerable<LibraryManager.BusinessLogic.Models.Book.BookModel>
+
+<head>
+    <meta charset="utf-8">
+    <title>Book&Brain</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="format-detection" content="telephone=no">
+    <link type="text/css" rel="stylesheet" href="~/css/liststyle.css">
+</head>
+<body>
+    <div class="mainwrapper">
+        <div class="header">
+            <div class="clearfix white-line">
+                <div class="resize">
+                    <div id="butthome" onclick="location.href = '/'">
+                        <h1 id="home">Book&Brain</h1>
+                    </div>
+                    <div id="login">
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+            <p id="log">
+                <a asp-action="login" asp-controller="auth">Реєстрація &#8226; Вхід</a>
+            </p> }
+                        else
+                        {
+            <p id="log">
+                @Html.ActionLink("Вийти", "Logout", "Auth")
+            </p>}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block_row">
+            <div class="clearfix block_column">
+                <div class="resize">
+                    <div class="fields">
+                        <h2>«Моя батьківщина там, де моя бібліотека»</h2>
+                        <p>Мережа книгарень «Book&Brain» має особливу концепцію, чітко визначену позицію. Ми вирізняємось між більшістю книжкових мереж тим, що просуваємо український продукт. Ця позиція відповідає очікуванням суспільства, бо, як свідчать соціологічні дослідження, більшість українців надають перевагу україномовній книзі.</p>
+                        <p>Мережа книгарень «Book&Brain» – це заохочення не лише для покупця, а й для українського видавця, оскільки його книжки посідають тут головні місця. Цим наша книгаря принципово відрізняється від більшості інших книжкових мереж в Україні, які цілеспрямовано просувають російську книгу.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review block_column">
+                <div class="description">
+                    <div class="kinds">
+                        <h3>Список асортименту книг</h3>
+                        <ul>
+                            <li>
+                                Предмети
+                                <ul>
+                                    @foreach (var subject in ViewBag.Subjects)
+                                    {
+                                        <li>@Html.ActionLink($"{subject}", "List", "Book", new { Subject = subject.ToString() })</li>
+                                    }
+                                </ul>
+                            </li>
+                            <li>
+                                Рівень
+                                <ul>
+                                    @foreach (var grade in ViewBag.Grades)
+                                    {
+                                        <li>@Html.ActionLink($"{grade}", "List", "Book", new { Grade = grade })</li>
+                                    }
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="list">
+                        @if (User.IsInRole("Admin"))
+                        {
+            @using (Html.BeginForm("Create", "Book", FormMethod.Get))
+            {
+<input type="submit" class="btn btn-success" value="Додати нову книгу" name="Create" />}}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <p>
+                                            Фото
+                                        </p>
+                                    </th>
+                                    <th>
+                                        <p>
+                                            Назва книжки
+                                        </p>
+                                    </th>
+                                    <th>
+                                        <p>
+                                            Предмет
+                                        </p>
+                                    </th>
+                                    <th>
+                                        <p>
+                                            Курс
+                                        </p>
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                    <tr>
+                        <td>
+                            <img alt="" width="100" height="100" src="/Book/GetPhoto?id=@item.Id" />
+                            @Html.HiddenFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            <p>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                @Html.DisplayFor(modelItem => item.Subject)
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                @Html.DisplayFor(modelItem => item.Grade)
+                            </p>
+                        </td>
+                        <td>
+                            @if (User.IsInRole("Admin"))
+                            {
+            @using (Html.BeginForm("Update", "Book", new { item.Id }, FormMethod.Get))
+            {
+<input type="submit" class="btn btn-success" value="Редагувати" />}
+                                @using (Html.BeginForm("Delete", "Book", new { item.Id }, FormMethod.Get))
+                                {
+            <input type="submit" class="btn btn-success" value="Видалити" />}}
+                        </td>
+                    </tr>}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="secwhite-line">
+            <div class="resize">
+                <div class="footer">
+                    <div class="paragr">
+                        <p>
+                            Книга – це мрія, яку ви тримаєте у руках...
+                        </p>
+                    </div>
+                    <div class="phones">
+                        <p id="name">Інтернет магазин</p>
+                        <p id="phone">+38(097) 545-23-56</p>
+                        <p id="phone">+38(068) 211-47-12</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

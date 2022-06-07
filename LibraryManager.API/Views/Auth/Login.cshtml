@@ -1,0 +1,88 @@
+@model LibraryManager.BusinessLogic.Models.Auth.AuthViewModel
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+    <title>Library</title>
+</head>
+
+<body>
+
+    <div class="containerWrapper">
+        <div class="container">
+
+            <button class="modalButtonLogin">
+                <p>Login</p>
+            </button>
+
+            <button class="modalButtonRegister">
+                <p>Register</p>
+            </button>
+
+            <div class="loginContainer">
+
+                <div class="loginWrapper">
+                    <h1 class="textLogin">Login</h1>
+                    <button class="closeButton">x</button>
+                    <div class="loginForm">
+                        <div class="login">
+                            <form asp-action="Login" method="post">
+                                <div asp-validation-summary="ModelOnly" class="loginValidation"></div>
+                                <div class="form-group">
+                                    <label asp-for="LoginUser.Email" class="control-label"></label><br/>
+                                    <input asp-for="LoginUser.Email" class="form-control" /><br />
+                                    <span asp-validation-for="LoginUser.Email" class="loginValidation"></span><br />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="LoginUser.Password" class="control-label"></label><br />
+                                    <input asp-for="LoginUser.Password" class="form-control" type="password" /><br />
+                                    <span asp-validation-for="LoginUser.Password" class="loginValidation"></span><br />
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Login" class="btn btn-primary" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="registerContainer">
+                <div class="registerWrapper">
+                    <h1 class="textRegister">Register</h1>
+                    <button class="closeButton">x</button>
+                    <div class="registerForm">
+                        <div class="register">
+                            <form asp-action="Register">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="RegisterUser.Username" class="control-label"></label>
+                                    <input asp-for="RegisterUser.Username" class="form-control" />
+                                    <span asp-validation-for="RegisterUser.Username" class="registerValidation"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="RegisterUser.Email" class="control-label"></label>
+                                    <input asp-for="RegisterUser.Email" class="form-control" />
+                                    <span asp-validation-for="RegisterUser.Email" class="registerValidation"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="RegisterUser.Password" class="control-label"></label>
+                                    <input asp-for="RegisterUser.Password" class="form-control" type="password" />
+                                    <span asp-validation-for="RegisterUser.Password" class="registerValidation"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Register" class="btn btn-primary" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/custom.js" type="text/javascript" asp-append-version="true"></script>
+</body>
